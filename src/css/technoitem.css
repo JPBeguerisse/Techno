@@ -1,0 +1,14 @@
+.card{
+    border: 5px solid navy;
+    padding: 20px;
+    margin: 20px;
+}
+
+.btn-delete{
+    background-color: #af0303;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
