@@ -4,8 +4,9 @@ import Menu from './components/Menu';
 import Home from './pages/Home';
 import TechnoAdd from './pages/TehnoAdd';
 import TechnoList from './pages/TechnoList';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {v4 as uuidv4} from "uuid";
+
 
 function App() {
   //Liste qui regroupe toutes les technos
@@ -20,6 +21,36 @@ function App() {
   {
     setTechnoList(technoList.filter((tech) => tech.id !== id))
   }
+  // useEffect(() => {
+  //   setStorageTechno(technoList);
+  // }, [technoList])
+
+
+  // const STORAGE_KEY = "technos";
+  // const [storageTechno, setStorageTechno] = useLocalStorage(STORAGE_KEY, []);
+
+  function saveData(technoList) {
+    localStorage.setItem('technoList', JSON.stringify(technoList));
+    console.log('sauv');
+  }
+
+  useEffect(() => {
+    saveData(technoList);
+  }, [technoList])
+
+
+  function getDataFromLocalStorage()
+  {
+    const storedTechnoList = localStorage.getItem('technoList');
+    return storedTechnoList ? JSON.parse(storedTechnoList) : [];
+  }
+
+  const storedTechnoList = getDataFromLocalStorage();
+  
+  useEffect(() => {
+    setTechnoList(storedTechnoList)
+  }, []);
+
   return (
     <Router>
       <div>
